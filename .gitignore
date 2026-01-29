@@ -22,3 +22,22 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+<<<<<<< HEAD
+=======
+
+
+/node_modules
+/vendor
+.env
+.env.backup
+.env.production
+composer.lock
+package-lock.json
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.phpunit.result.cache
+database.sqlite
+database.sqlite-journal
+>>>>>>> 3973bceb8cfbadd1d7d14d887921203463eb8557
