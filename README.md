@@ -48,3 +48,28 @@ Conception d'une base de données SQLite optimisée pour l'analyse de texte.
     Sécurité : Sanctum, CORS Policy
 
     Base de données : SQLite
+
+---
+
+##  Module : Authentification & Sécurité (Réalisé par Membre B)
+
+Cette branche contient l'implémentation de la couche de sécurité du projet utilisant **Laravel Sanctum**. L'objectif est de sécuriser les échanges entre le front-end et l'API via des jetons (tokens).
+
+###  Ce qui a été fait :
+- **Installation de Laravel Sanctum** : Configuration du système d'authentification par jeton.
+- **AuthController** : Création du contrôleur gérant :
+  - `register()` : Inscription des nouveaux utilisateurs.
+  - `login()` : Vérification des identifiants et génération du token.
+  - `logout()` : Révocation du token pour une déconnexion sécurisée.
+- **Routes API** : Mise en place des points d'accès sécurisés dans `routes/api.php`.
+- **Middleware** : Protection des routes sensibles pour n'autoriser que les utilisateurs connectés.
+
+---
+
+###  Instructions pour l'équipe (Installation)
+
+Pour tester ma partie sur votre machine, suivez ces étapes :
+
+1. **Mettre à jour les dépendances :**
+   ```bash
+   composer install
