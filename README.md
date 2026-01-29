@@ -1,4 +1,4 @@
-##Technical Lead : Architecture & Security (Membre B)
+##Technical Lead : Architecture & Security (Membre B) Abdramane Diallo
 
 Ce volet du projet documente la conception de l'infrastructure, la sécurisation des données et l'orchestration des services critiques. Le Membre B a assuré le rôle de garant de la stabilité et de l'intégrité du système.
 ##1. Architecture Système & API Design
