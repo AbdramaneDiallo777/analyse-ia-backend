@@ -1,59 +1,50 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+##Technical Lead : Architecture & Security (Membre B)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Ce volet du projet documente la conception de l'infrastructure, la sécurisation des données et l'orchestration des services critiques. Le Membre B a assuré le rôle de garant de la stabilité et de l'intégrité du système.
+##1. Architecture Système & API Design
 
-## About Laravel
+## L'architecture a été conçue selon un modèle decoupled (headless) pour séparer strictement la logique métier de la présentation.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+    API RESTful : Implémentation d'une API Stateless avec Laravel 11. Toutes les réponses sont normalisées au format JSON avec les codes d'état HTTP appropriés (200, 201, 401, 422).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+    Layered Architecture : Introduction d'une couche de Services (App\Services) pour isoler l'algorithme NLP du ReviewController, facilitant ainsi la maintenance et les tests unitaires.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    Gestion des Dépendances : Orchestration via Composer (PHP) et intégration des processus Python pour l'analyse de données.
 
-## Learning Laravel
+##2. Sécurité et Authentification (Laravel Sanctum)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Le Membre B a mis en place une stratégie de sécurité multicouche pour protéger les données sensibles des utilisateurs.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    Authentification par Token Bearer : Abandon des sessions traditionnelles au profit de Laravel Sanctum. Chaque requête sécurisée est validée via un jeton unique stocké par le client.
 
-## Laravel Sponsors
+    Middlewares de Protection : Configuration du groupe de middleware auth:sanctum pour restreindre l'accès aux fonctionnalités de stockage, d'historique et de génération de rapports.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+    Validation de Schéma : Implémentation de FormRequests pour intercepter et valider les données entrantes avant qu'elles n'atteignent les couches métier.
 
-### Premium Partners
+##3. Orchestration des Processus 
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+L'une des réalisations techniques majeures est le pont établi entre Laravel et le moteur graphique Python.
 
-## Contributing
+    Service de Processus : Utilisation de la façade Illuminate\Support\Facades\Process pour exécuter audit_viz.CSV.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    Data Streaming : Les données de la base SQLite sont extraites, converties en JSON par Laravel, puis transmises au script Python via l'entrée standard (stdin).
 
-## Code of Conduct
+    Filesystem Integration : Gestion du stockage des graphiques générés dans le répertoire storage/app/public avec création d'un lien symbolique pour permettre un accès URL via le Frontend.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+##4. Infrastructure de Données & Modélisation
 
-## Security Vulnerabilities
+Conception d'une base de données SQLite optimisée pour l'analyse de texte.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    Migrations Atomiques : Création de structures de tables robustes avec contraintes d'intégrité (clés étrangères avec onDelete('cascade')).
 
-## License
+    Optimisation JSON : Utilisation du type de colonne json pour le champ topics, permettant de stocker des métadonnées complexes sans multiplier les tables pivots.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    Eloquent Casting : Configuration du modèle Review.php pour transformer automatiquement les données JSON en tableaux PHP ('topics' => 'array').
+
+## Stack Technique (Maîtrisée par le Membre B)
+
+    Backend : Laravel 11, PHP 8.2+
+
+    Sécurité : Sanctum, CORS Policy
+
+    Base de données : SQLite
