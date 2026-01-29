@@ -71,7 +71,7 @@ Voici la liste des fichiers impactés par ce module :
 
 ---
 
-###  Ce qui a été fait :
+###  Ce qui a ete fait :
 - **Installation de Laravel Sanctum** : Configuration du système d'authentification par jeton.
 - **Logique Auth** : Inscription, vérification des identifiants et génération automatique du token.
 - **Sécurisation** : Mise en place de la protection des routes sensibles pour n'autoriser que les utilisateurs authentifiés.
