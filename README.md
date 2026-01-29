@@ -73,3 +73,9 @@ Pour tester ma partie sur votre machine, suivez ces étapes :
 1. **Mettre à jour les dépendances :**
    ```bash
    composer install
+
+Méthode,Route,Description
+POST,/api/register,Création de compte
+POST,/api/login,Connexion et retour du token
+GET,/api/user,Infos utilisateur (Protégé)
+POST,/api/logout,Déconnexion (Protégé)
