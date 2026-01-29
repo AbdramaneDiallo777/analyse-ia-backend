@@ -49,20 +49,32 @@ Conception d'une base de données SQLite optimisée pour l'analyse de texte.
 
     Base de données : SQLite
 
+
+
 ---
 
 ##  Module : Authentification & Sécurité (Réalisé par Membre B)
 
 Cette branche contient l'implémentation de la couche de sécurité du projet utilisant **Laravel Sanctum**. L'objectif est de sécuriser les échanges entre le front-end et l'API via des jetons (tokens).
 
+###  Fichiers créés ou modifiés
+Voici la liste des fichiers impactés par ce module :
+
+* **`app/Http/Controllers/Api/AuthController.php`** (Créé) : 
+    * Contient toute la logique de l'API (Inscription, Connexion, Déconnexion).
+* **`config/sanctum.php`** (Créé/Configuré) : 
+    * Fichier de configuration technique pour la gestion des jetons.
+* **`routes/api.php`** (Modifié) : 
+    * Ajout des endpoints de connexion et protection des routes via le middleware `auth:sanctum`.
+* **`app/Models/User.php`** (Modifié) : 
+    * Ajout du Trait `HasApiTokens` pour permettre à l'utilisateur de générer des clés de sécurité.
+
+---
+
 ###  Ce qui a été fait :
 - **Installation de Laravel Sanctum** : Configuration du système d'authentification par jeton.
-- **AuthController** : Création du contrôleur gérant :
-  - `register()` : Inscription des nouveaux utilisateurs.
-  - `login()` : Vérification des identifiants et génération du token.
-  - `logout()` : Révocation du token pour une déconnexion sécurisée.
-- **Routes API** : Mise en place des points d'accès sécurisés dans `routes/api.php`.
-- **Middleware** : Protection des routes sensibles pour n'autoriser que les utilisateurs connectés.
+- **Logique Auth** : Inscription, vérification des identifiants et génération automatique du token.
+- **Sécurisation** : Mise en place de la protection des routes sensibles pour n'autoriser que les utilisateurs authentifiés.
 
 ---
 
@@ -73,9 +85,3 @@ Pour tester ma partie sur votre machine, suivez ces étapes :
 1. **Mettre à jour les dépendances :**
    ```bash
    composer install
-
-Méthode,Route,Description
-POST,/api/register,Création de compte
-POST,/api/login,Connexion et retour du token
-GET,/api/user,Infos utilisateur (Protégé)
-POST,/api/logout,Déconnexion (Protégé)
