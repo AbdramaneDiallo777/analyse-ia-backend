@@ -12,7 +12,7 @@ class ReviewAnalyzer
         'topissime', 'parfaitement', 'propre', 'soigne', 'qualite', 'solide', 'robuste',
         // Service & Rapidité
         'rapid', 'vite', 'efficace', 'reactif', 'pro', 'sympa', 'accueillant', 'aimable', 
-        'serieux', 'fiable', 'ponctuel', 'ecoute', 'disponible', 'serviable', 'geniaux',
+        'serieux', 'fiable', 'ponctuel', 'ecoute', 'disponible', 'serviable', 'geniaux','fiable'
         // Prix
         'economique', 'abordable', 'cadeau', 'aubaine', 'rentable', 'correct', 'honnete'
     ];
